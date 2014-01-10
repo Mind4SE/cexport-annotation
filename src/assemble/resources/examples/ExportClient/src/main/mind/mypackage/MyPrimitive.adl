@@ -1,0 +1,6 @@
+primitive mypackage.MyPrimitive {
+	provides boot.Main as entryPoint;
+ 	@CExport
+ 	requires MyInterface as myItf;
+  	source MyPrimitive.c;
+}

@@ -1,0 +1,4 @@
+composite mypackage.ExportContainer {
+	@CExport
+	contains MyComposite as comp;	
+}

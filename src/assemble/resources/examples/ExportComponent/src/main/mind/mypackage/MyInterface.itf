@@ -1,0 +1,4 @@
+
+interface mypackage.MyInterface {
+	uint8_t getNumber(void);
+}

@@ -1,0 +1,128 @@
+template st.CEXPORTWRAPPER : st.interfaces.IDL2C{
+  $${
+	  
+isClient ::= [ "client" : "true" ]
+isServer ::= [ "server" : "true" ]
+
+/** 
+ * Generates a ".c" wrapper file.
+ */
+
+WrapperServerDefinition(interfaceDefinition, prefix, itfName) ::= <<
+<interfaceDefinition.methods:{<wrapCltMethod(prefix=prefix, itfName=itfName, method=it)>};separator="\n\n">
+>>
+
+WrapperClientDefinition(interfaceDefinition, prefix, itfName) ::= <<
+<interfaceDefinition.methods:{<wrapSrvMethod(prefix=prefix, itfName=itfName, method=it)>};separator="\n\n">
+>>
+
+// -----------------------------------------------------------------------------
+// Internal templates
+// -----------------------------------------------------------------------------
+
+
+
+
+
+dualMethPrototype(name, parameters) ::= <<
+<name>(<parameters:parameterDef(parameter=it); separator=", ">, va_list param_list)
+>>
+
+
+cMethCall(prefix, method) ::= <<
+<prefix><method.name>(<method.parameters:parameterName(parameter=it); separator=", ">)
+>>
+
+
+
+ServerInterfacesWrapper(definition, interfaceDefinitions, itf) ::= <<
+<if (isServer.(itf.role))>
+<if (itf.numberOfElement)>
+//FIXME collection interface
+//<itf.astDecorations.("collectionIndexes"):CollectionServerMethodsWrapper(definition=definition, interfaceDefinitions=interfaceDefinitions, itf=itf, index=it);separator="\n">
+<else>
+<interfaceDefinitions.(itf.signature).methods:ServerMethodsWrapper(definition=definition, itf=itf, method=it)>
+<endif>
+<endif>
+>>
+
+/////SRV
+
+wrapSrvMethod(prefix, itfName, method) ::= <<
+<if(method.vaArgs)>
+<mindMethDef(itfName=itf.name, method=method)>{
+  <if (! (isVoidMethod(method=method)))><varDef(type=method.type, name="ret")>;<endif>
+  va_list paramList;
+  va_start(paramList, <last(method.parameters).name>);
+  <if (! (isVoidMethod(method=method)))>
+  ret = <endif>CALL(<itf.name>, <method.vaArgs.dualMethodName>)(<method.parameters:parameterName(parameter=it); separator=", ">, paramList);
+  va_end(paramList);
+  <if (! (isVoidMethod(method=method)))>
+  return ret;
+  <endif>
+<else>
+<mindMethDef(itfName=itfName, method=method)>{
+  <if (! (isVoidMethod(method=method)))>
+  return <endif><cMethCall(prefix=prefix, method=method)>;
+<endif>
+
+}
+>>
+
+mindMethDef(itfName, method) ::= <<
+<typeQualifier(qualifiers=method)><varDef(type=method.type, name=mindMethodSignature(itfName = itfName, method=method))>
+>>
+
+mindMethodSignature(itfName, method) ::= <<
+METH(<itfName>, <method.name>)(<if(method.parameters)>
+<method.parameters:parameterDef(parameter=it); separator=", "><if (method.vaArgs)>, ...<endif>
+<else>
+void
+<endif>)
+>>
+
+/////CLT
+
+wrapCltMethod(prefix, itfName, method) ::= <<
+<if(method.vaArgs)>
+<cMethDef(prefix=prefix, itfName=itfName, method=method)>{
+  <if (! (isVoidMethod(method=method)))><varDef(type=method.type, name="ret")>;<endif>
+  va_list paramList;
+  va_start(paramList, <last(method.parameters).name>);
+  <if (! (isVoidMethod(method=method)))>
+  ret = <endif>CALL(<itfName>, <method.vaArgs.dualMethodName>)(<method.parameters:parameterName(parameter=it); separator=", ">, paramList);
+  va_end(paramList);
+  <if (! (isVoidMethod(method=method)))>
+  return ret;
+  <endif>
+<else>
+<cMethDef(prefix=prefix, itfName=itfName, method=method)>{
+  <if (! (isVoidMethod(method=method)))>
+  return <endif><methCall(itfName=itfName,method=method)>;
+<endif>
+}
+>>
+
+cMethDef(prefix, itfName, method) ::= <<
+<typeQualifier(qualifiers=method)><varDef(type=method.type, name=cMethodSignature(prefix = prefix, method=method))>
+>>
+
+cMethodSignature(prefix, method) ::= <<
+<prefix><method.name>(<if(method.parameters)>
+<method.parameters:parameterDef(parameter=it); separator=", "><if (method.vaArgs)>, ...<endif>
+<else>
+void
+<endif>)
+>>
+
+methCall(itfName,method) ::= <<
+CALL(<itfName>,<method.name>)(<method.parameters:parameterName(parameter=it); separator=", ">)
+>>
+
+
+
+
+
+  }$$
+}
+  

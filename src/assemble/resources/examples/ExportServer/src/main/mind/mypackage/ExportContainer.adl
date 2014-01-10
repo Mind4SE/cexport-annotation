@@ -1,0 +1,8 @@
+/**
+ * This component does not provide nor requires any interface 
+ * it is only a container to compile and export symbols from 
+ * MyPrimitive
+ */
+composite mypackage.ExportContainer {
+	contains MyPrimitive as myPrimitive;	
+}

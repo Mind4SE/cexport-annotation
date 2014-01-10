@@ -1,0 +1,5 @@
+composite mypackage.ExportContainer {
+	contains boot.Bootstrap as boot;
+	contains MyPrimitive as myPrimitive;
+	binds boot.entryPoint to myPrimitive.entryPoint;
+}

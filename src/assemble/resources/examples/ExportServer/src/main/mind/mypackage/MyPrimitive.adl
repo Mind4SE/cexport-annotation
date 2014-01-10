@@ -1,0 +1,12 @@
+primitive mypackage.MyPrimitive {
+ 	/**
+ 	 * This interface will be export
+ 	 * symbols for C linkage. 
+ 	 */
+ 	@CExport
+ 	provides MyInterface as myItf;
+  	/**
+  	 * Mind implementation of the interface
+  	 */
+  	source MyPrimitive.c;
+}

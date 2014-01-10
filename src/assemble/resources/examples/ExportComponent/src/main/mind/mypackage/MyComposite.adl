@@ -1,0 +1,5 @@
+composite mypackage.MyComposite {
+	provides MyInterface as srv;
+	binds this.srv to this.clt;
+	requires MyInterface as clt;
+}

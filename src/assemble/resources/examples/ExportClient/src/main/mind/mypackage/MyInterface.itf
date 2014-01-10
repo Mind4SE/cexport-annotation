@@ -1,0 +1,16 @@
+/**
+ * This header contains types definition for
+ * some of the methods of this interface
+ */
+#include <stdbool.h>
+
+interface mypackage.MyInterface {
+	/**
+	 * A method using only common types
+	 */
+	uint8_t myUInt8_tMethod(void);
+	/**
+	 * A method using a typedef from stdbool.h
+	 */
+	bool myBoolMethod(void);
+}

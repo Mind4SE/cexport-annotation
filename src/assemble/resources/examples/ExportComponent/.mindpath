@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mindpath>
+	<mindpathentry kind="SOURCE" path="/ExportComponent/src/main/mind"/>
+	<mindpathentry kind="SOURCE" path="/ExportComponent/src/test/mind"/>
+	<mindpathentry kind="APPLI" path="mypackage.ExportContainer:comp.o"/>
+</mindpath>
