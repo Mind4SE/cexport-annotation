@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="interfaceInstances" 
+version="5.0" 
+xmlns="http://docbook.org/ns/docbook"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  >
+    <title>
+        Exporting interface instances
+    </title>
+    <section>
+    <title>Concept</title>
+    <para>
+	In this mode, it is possible to annotate interfaces instances. 
+	Making it possible to cherry-peak interfaces (from deep under many composite layers for example).
+	<code>provides</code> or <code>requires</code> statement should be annotated with <code>@CExport</code>.     
+    </para>
+    <para>
+    When exporting interfaces, two optional parameters can be passed with the <code>CExport</code> annotation :
+    <itemizedlist>
+    <listitem><code>CExport(prefix="somePrefix")</code> then the methods and header file will be prefixed with <code>somePrefix</code> instead of the interface name.</listitem>
+    <listitem><code>CExport(multiInstance=true)</code> then the method and headers will be prefixed with the specified prefix plus an instance number. This allow to export interfaces of multi instantiated component. The default value for this option is <code>false</code>.</listitem>
+    </itemizedlist>
+    </para>
+    </section>
+    <section>
+    <title>Example</title>
+    <para>
+	Examples of usage of the <code>CExport</code> annotation on interfaces can be found together with the source code of the CExport plugin. 
+	(https://github.com/jtous/cexport-annotation)
+	TODO: explain  those here.    
+    </para>
+    </section>   
+</chapter>

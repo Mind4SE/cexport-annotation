@@ -1,5 +1,14 @@
+/**
+ * This component is used as a demonstration 
+ * to the @CExport annotation plugin.
+ */
 composite mypackage.MyComposite {
+	
+	//All interfaces will be exported
 	provides MyInterface as srv;
-	binds this.srv to this.clt;
 	requires MyInterface as clt;
+
+	//The inside of the component doesn't matter
+	//It can be as complex as you want.
+	binds this.srv to this.clt;
 }

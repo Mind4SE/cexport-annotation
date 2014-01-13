@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+  "./dtd/docbookx.dtd" [
+<!ENTITY % myents SYSTEM "./shared.ent" >
+%myents;
+]>
+<chapter id="linker">
+    <title>
+        Forewords about the linkage phase
+    </title>
+    <para>
+    To create a library an usually use use an archiver such as <code>GNU ar</code>.
+    However the mind toolchain for now (january 2014) does handle such a tool.
+    We will for the rest of this document assume we will use a linker (for instance <code>GNU ld</code>) 
+    to compile output object files from the compilation steps into a single relocatable object file.
+    Which is the easiest way to proceed.
+    </para>
+    <para>
+    The linker command should be set to <code>ld</code> (and not <code>gcc</code> which is the default).
+    And the <code>-r</code> option should be present in the linker flag.
+    The output file of the linker will be a relocatable object we will suffixed it with <code>.o</code>
+     <example>
+     <title>Option to configure the linker on mindc command line</title>
+     <programlisting linenumbering="unnumbered" >
+mindc ... --linker-command="ld" --ld-flags="-r" ... TargetComponent:OutputFile.o
+     </programlisting>
+     </example>
+     
+     <example>
+     <title>Option to configure the linker with the properties file</title>
+     <programlisting linenumbering="unnumbered" >
+...
+linkerCommand = ld
+ldFlags = -r
+binaryName = OutputFile.o
+...
+     </programlisting>
+     </example> 
+    </para>
+    <note>
+    <para>
+    As an alternative to using <code>ld</code> one would have to extend the 
+    <code>org.ow2.mind.compilation.AbstractLinkerCommand.java</code> class
+    from the <code>common-backend</code> module of the compiler.
+    TODO: Document those parts of the compiler in an other document to reference here.
+    </para>  
+    </note>
+</chapter>

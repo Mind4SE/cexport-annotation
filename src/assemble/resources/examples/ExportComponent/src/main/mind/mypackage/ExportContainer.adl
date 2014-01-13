@@ -1,3 +1,8 @@
+/**
+ * This composite only purpose is to instantiate
+ * a component of type MyComposite to export its
+ * interface as C methods
+ */
 composite mypackage.ExportContainer {
 	@CExport
 	contains MyComposite as comp;	
