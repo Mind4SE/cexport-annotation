@@ -1,5 +1,5 @@
 <!--
-  Copyright (C) 2011 STMicroelectronics
+  Copyright (C) 2014 Schneider-Electric
 
  This file is part of "Mind Compiler" is free software: you can redistribute 
  it and/or modify it under the terms of the GNU Lesser General Public License 
@@ -16,20 +16,14 @@
 
  Contact: mind@ow2.org
 
- Authors: Matthieu Anne
- Contributors: Matthieu Leclercq
+ Authors: Julien Tous
+ Contributors: 
 
  -->
 <plugin id="org.ow2.mind.cexport-annotations" name="CExport annotations plug-in.">
+	
 	<extension point="org.ow2.mind.predefined-annotations">
 		<annotation package="org.ow2.mind.adl.annotations" />
 	</extension>
-
- <!-- 	<extension point="org.ow2.mind.plugin.guice-module">
-		<module class="org.ow2.mind.adl.annotations.CExportModule">
-		<combine
-                class="org.ow2.mind.CommonFrontendModule" />
-                </module>
-	</extension>
-  -->
+	
 </plugin>
