@@ -176,7 +176,7 @@ AbstractADLLoaderAnnotationProcessor {
 				is.close();
 				os.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				System.err.println("IOException when copying " + mindCommonFile.getAbsolutePath() + " to " + output.getAbsolutePath());
 				e.printStackTrace();
 			}
 		}
@@ -241,7 +241,7 @@ AbstractADLLoaderAnnotationProcessor {
 			try {
 				SourceFileWriter.writeToFile(headerFile, headerST.toString());
 			} catch (final IOException e) {
-				// TODO Auto-generated catch block
+				System.err.println("IOException on file " + headerFile.getAbsolutePath());
 				e.printStackTrace();
 			}
 
@@ -275,7 +275,7 @@ AbstractADLLoaderAnnotationProcessor {
 			((BindingContainer) definition).addBinding(binding);
 
 		} catch (final ADLException e) {
-			// TODO Auto-generated catch block
+			System.err.println("ADLException when creating @CExport wrapper component");
 			e.printStackTrace();
 		}
 	}
@@ -339,7 +339,7 @@ AbstractADLLoaderAnnotationProcessor {
 			try {
 				SourceFileWriter.writeToFile(headerFile, headerST.toString());
 			} catch (final IOException e) {
-				// TODO Auto-generated catch block
+				System.err.println("IOException on file " + headerFile.getAbsolutePath());
 				e.printStackTrace();
 			}
 
@@ -373,7 +373,7 @@ AbstractADLLoaderAnnotationProcessor {
 			((BindingContainer) definition).addBinding(binding);
 
 		} catch (final ADLException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 	}
